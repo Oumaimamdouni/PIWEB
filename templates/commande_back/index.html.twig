@@ -1,0 +1,78 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Commande index{% endblock %}
+
+{% block body %}
+    <div class="container-fluid mt-4">
+        <h1 class="mb-4">Commande</h1>
+
+        <!-- Search Input -->
+        <div class="mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search by Numc, Adressec, Status, etc.">
+        </div>
+<a href="{{ path('app_commande_back_export_pdf') }}" class="btn btn-secondary">Export to PDF</a>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Numc</th>
+                                <th scope="col">Adressec</th>
+                                <th scope="col">Panier</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for commande in commandes %}
+                                <tr>
+                                    <td>{{ commande.numc }}</td>
+                                    <td>{{ commande.adressec }}</td>
+                                    <td>{{ commande.panier }}</td>
+                                    <td>{{ commande.price }}</td>
+                                    <td>{{ commande.status }}</td>
+                                    <td>
+                                        <a href="{{ path('app_commande_back_show', {'numc': commande.numc}) }}" class="btn btn-sm btn-primary">Show</a>
+                                        <a href="{{ path('app_commande_back_edit', {'numc': commande.numc}) }}" class="btn btn-sm btn-warning">Edit</a>
+                                        
+                                        {% if commande.status == 'On Hold' %}
+                                            <a href="{{ path('app_commande_change_status', {'numc': commande.numc, 'status': 'Processing'}) }}" class="btn btn-sm btn-success">Process</a>
+                                        {% elseif commande.status == 'Processing' %}
+                                            <a href="{{ path('app_commande_change_status', {'numc': commande.numc, 'status': 'Completed'}) }}" class="btn btn-sm btn-info">Complete</a>
+                                        {% elseif commande.status == 'Completed' %}
+                                            <a href="{{ path('app_commande_change_status', {'numc': commande.numc, 'status': 'Cancelled'}) }}" class="btn btn-sm btn-danger">Cancel</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">No records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <a href="{{ path('app_commande_back_new') }}" class="btn btn-primary mt-4">Create New</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const tableRows = document.querySelectorAll('table tbody tr');
+
+            searchInput.addEventListener('input', function () {
+                const searchText = searchInput.value.trim().toLowerCase();
+
+                tableRows.forEach(row => {
+                    const rowData = Array.from(row.children).map(cell => cell.textContent.trim().toLowerCase());
+                    row.style.display = rowData.some(text => text.includes(searchText)) ? '' : 'none';
+                });
+            });
+        });
+    </script>
+{% endblock %}

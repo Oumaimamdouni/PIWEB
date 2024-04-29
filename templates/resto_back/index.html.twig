@@ -1,0 +1,67 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Resto index{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="mb-4">Resto</h1>
+        <div class="card">
+            <div class="card-body">
+<a href="{{ path('app_resto_back_export_excel') }}" class="btn btn-secondary">Export to Excel</a>
+
+            <a href="{{ path('app_resto_back_export_pdf') }}" class="btn btn-secondary">Export to PDF</a>
+                <div class="mb-3">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search by ID, Name, Address, etc.">
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">IdResto</th>
+                                <th scope="col">Nomr</th>
+                                <th scope="col">Adresser</th>
+                                <th scope="col">Numr</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for resto in restos %}
+                                <tr>
+                                    <td>{{ resto.idResto }}</td>
+                                    <td>{{ resto.nomr }}</td>
+                                    <td>{{ resto.adresser }}</td>
+                                    <td>{{ resto.numr }}</td>
+                                    <td>
+                                        <a href="{{ path('app_resto_back_show', {'idResto': resto.idResto}) }}" class="btn btn-sm btn-primary">Show</a>
+                                        <a href="{{ path('app_resto_back_edit', {'idResto': resto.idResto}) }}" class="btn btn-sm btn-secondary">Edit</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">No records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <a href="{{ path('app_resto_back_new') }}" class="btn btn-primary mt-3">Create New</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const tableRows = document.querySelectorAll('table tbody tr');
+
+            searchInput.addEventListener('input', function () {
+                const searchText = searchInput.value.trim().toLowerCase();
+
+                tableRows.forEach(row => {
+                    const rowData = Array.from(row.children).map(cell => cell.textContent.trim().toLowerCase());
+                    row.style.display = rowData.some(text => text.includes(searchText)) ? '' : 'none';
+                });
+            });
+        });
+    </script>
+{% endblock %}

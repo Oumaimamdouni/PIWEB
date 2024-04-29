@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande Index{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="text-align: center;">
+        <h1 style="margin-bottom: 20px;">My Command History</h1>
+        <a href="{{ path('app_chat_bot') }}" class="btn btn-lg btn-info mb-3">Chat with Support</a>
+
+        <div class="table-responsive" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px;">
+            <table class="table table-bordered table-hover text-center" style="width: 100%;">
+                <thead style="background-color: #343a40; color: #fff;">
+                    <tr>
+                        <th scope="col">Order Number</th>
+                        <th scope="col">Shipping Address</th>
+                        <th scope="col">Items</th>
+                        <th scope="col">Total Price</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for commande in commandes %}
+                    <tr style="background-color: #fff;">
+                        <td>{{ commande.numc }}</td>
+                        <td>{{ commande.adressec }}</td>
+                        <td>{{ commande.panier }}</td>
+                        <td>{{ commande.price }}</td>
+                        <td>{{ commande.status }}</td>
+                        <td>
+                            <a href="{{ path('app_commande_show', {'numc': commande.numc}) }}" class="btn btn-sm btn-primary">View Details</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">No records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

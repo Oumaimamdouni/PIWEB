@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resto Index{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 class="text-center">Resto Index</h1>
+
+        <div class="row justify-content-center">
+            {% for resto in restos %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('resto.jpg') }}" class="card-img-top" alt="Restaurant Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ resto.nomr }}</h5>
+                            <p class="card-text">Address: {{ resto.adresser }}</p>
+                            <p class="card-text">Number: {{ resto.numr }}</p>
+
+                            <!-- Show and Commande buttons -->
+                            <a href="{{ path('app_resto_show', {'idResto': resto.idResto}) }}" class="btn btn-primary">Show</a>
+                            <a href="{{ path('app_commande_new', {'idResto': resto.idResto}) }}" class="btn btn-success">Commande</a>
+
+                            <!-- Facebook and Twitter Share Buttons -->
+                            <div class="mt-2">
+
+                                <a 
+                                    href="https://twitter.com/intent/tweet?text={{ resto.nomr }} - Check out this restaurant!&url={{ url('app_resto_show', {'idResto': resto.idResto}) }}"
+                                    target="_blank" 
+                                    class="btn btn-info"
+                                    style="background-color: #1DA1F2; border-color: #1DA1F2;"
+                                >
+                                    Share on Twitter
+                                </a>
+                                                                <a 
+                                    href="https://www.facebook.com/sharer/sharer.php?u={{ url('app_resto_show', {'idResto': resto.idResto}) }}&quote={{ resto.nomr }} - Check out this restaurant!"
+                                    target="_blank"
+                                    class="btn btn-info"
+                                    style="background-color: #3b5998; border-color: #3b5998;"
+                                >
+                                    Share on Facebook
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col">
+                    <p class="text-center">No records found</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

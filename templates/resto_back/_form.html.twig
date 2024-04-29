@@ -1,0 +1,21 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <div class="form-group">
+        {{ form_label(form.nomr) }}
+        {{ form_widget(form.nomr, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.nomr) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.adresser) }}
+        {{ form_widget(form.adresser, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.adresser) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.numr) }}
+        {{ form_widget(form.numr, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.numr) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

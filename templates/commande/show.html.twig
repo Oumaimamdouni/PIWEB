@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="margin-bottom: 20px;">Commande Details</h1>
+
+        <div class="card" style="background-color: #fff; border: none; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); width: 50%; margin: 0 auto;">
+            <div class="card-body">
+                <a href="{{ path('app_commande_index') }}" class="btn btn-primary mb-3">Back to List</a>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th style="width: 30%;">Order Number</th>
+                            <td>{{ commande.numc }}</td>
+                        </tr>
+                        <tr>
+                            <th style="width: 30%;">Shipping Address</th>
+                            <td>{{ commande.adressec }}</td>
+                        </tr>
+                        <tr>
+                            <th style="width: 30%;">Items</th>
+                            <td>{{ commande.panier }}</td>
+                        </tr>
+                        <tr>
+                            <th style="width: 30%;">Total Price</th>
+                            <td>{{ commande.price }}</td>
+                        </tr>
+                        <tr>
+                            <th style="width: 30%;">Status</th>
+                            <td>{{ commande.status }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

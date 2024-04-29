@@ -1,0 +1,22 @@
+
+    <h1>Resto List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>IdResto</th>
+                <th>Nomr</th>
+                <th>Adresser</th>
+                <th>Numr</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resto in restos %}
+                <tr>
+                    <td>{{ resto.idResto }}</td>
+                    <td>{{ resto.nomr }}</td>
+                    <td>{{ resto.adresser }}</td>
+                    <td>{{ resto.numr }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>

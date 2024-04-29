@@ -1,0 +1,13 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Edit Resto{% endblock %}
+
+{% block body %}
+    <h1>Edit Resto</h1>
+
+    <a href="{{ path('app_resto_back_index') }}">back to list</a>
+    {{ include('resto_back/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+    {{ include('resto_back/_delete_form.html.twig') }}
+{% endblock %}

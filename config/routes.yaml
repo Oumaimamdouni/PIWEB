@@ -1,0 +1,12 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+app_commande_change_status:
+    path: '/commande/back/{numc}/change-status/{status}'
+    controller: App\Controller\CommandeBackController::changeStatus
+
+app_chatbot:
+    path: '/chatbot/interact'
+    controller: App\Controller\CommandeController::chat
+    methods: ['POST']

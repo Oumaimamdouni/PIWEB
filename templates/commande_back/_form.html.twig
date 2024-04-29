@@ -1,0 +1,34 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.adressec) }}
+            {{ form_widget(form.adressec, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.adressec) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.panier) }}
+            {{ form_widget(form.panier, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.panier) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.price) }}
+            {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.price) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.status) }}
+            {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.status) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.idresto) }}
+            {{ form_widget(form.idresto, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.idresto) }}
+        </div>
+    </div>
+</div>
+<button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
