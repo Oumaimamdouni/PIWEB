@@ -1,0 +1,74 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}CategorieMenu Index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mb-4">Categorie Menu</h1>
+
+        <!-- Search Input -->
+        <div class="form-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search by ID, Category Name, or Description">
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Category Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                {% for categorie_menu in categorie_menus %}
+                    <tr>
+                        <td>{{ categorie_menu.idCategorie }}</td>
+                        <td>{{ categorie_menu.nomCategorie }}</td>
+                        <td>{{ categorie_menu.descriptionCategorie }}</td>
+                        <td><img src="{{ asset('uploads/' ~ categorie_menu.imageCategorie) }}" alt="{{ categorie_menu.nomCategorie }}" class="img-fluid" style="max-width: 100px;"></td>
+                        <td>
+                            <a href="{{ path('app_categorie_menu_back_show', {'idCategorie': categorie_menu.idCategorie}) }}" class="btn btn-sm btn-info mr-2">Show</a>
+                            <a href="{{ path('app_categorie_menu_back_edit', {'idCategorie': categorie_menu.idCategorie}) }}" class="btn btn-sm btn-primary">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">No records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="{{ path('app_categorie_menu_back_new') }}" class="btn btn-success mt-3">Create New Category</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const tableBody = document.getElementById('tableBody');
+
+            searchInput.addEventListener('input', function () {
+                const searchText = searchInput.value.trim().toLowerCase();
+                const rows = tableBody.getElementsByTagName('tr');
+
+                for (let row of rows) {
+                    const cells = row.getElementsByTagName('td');
+                    let found = false;
+
+                    for (let cell of cells) {
+                        if (cell.textContent.toLowerCase().includes(searchText)) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    row.style.display = found ? '' : 'none';
+                }
+            });
+        });
+    </script>
+{% endblock %}

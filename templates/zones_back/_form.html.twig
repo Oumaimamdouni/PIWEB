@@ -1,0 +1,78 @@
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dropZone = document.getElementById('image-drop-zone');
+    const fileInput = document.querySelector('input[type="file"]');
+
+    dropZone.addEventListener('dragover', function(event) {
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'copy';
+        dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', function(event) {
+        dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', function(event) {
+        event.preventDefault();
+        dropZone.classList.remove('dragover');
+
+        const files = event.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files;  // Assign the dropped files to the hidden input
+        }
+    });
+
+    dropZone.addEventListener('click', function() {
+        fileInput.click();  // Trigger the file input click to open the file browser
+    });
+});
+</script>
+
+<style>
+.drop-zone {
+    border: 2px dashed #ccc;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.drop-zone.dragover {
+    border-color: #666;
+    background-color: #f0f0f0;
+}
+</style>
+{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+
+<div class="form-group">
+    {{ form_label(form.nom) }}
+    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.nom) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.description) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.capacity) }}
+    {{ form_widget(form.capacity, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.capacity) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.image) }}
+    <div class="drop-zone" id="image-drop-zone">
+        <img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2015/11/drag-drop-upload-5.gif" alt="Drag and drop files here" class="drag-and-drop-gif" />
+        <p>Drag and drop an image here, or click to select a file</p>
+        {{ form_widget(form.image, {'attr': {'style': 'display:none'}}) }}  <!-- Hidden input -->
+    </div>
+    {{ form_errors(form.image) }}
+</div>
+
+<button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}

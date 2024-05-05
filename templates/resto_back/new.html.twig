@@ -1,0 +1,10 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}New Resto{% endblock %}
+
+{% block body %}
+    <h1>Create new Resto</h1>
+    <a href="{{ path('app_resto_back_index') }}">back to list</a>
+    {{ include('resto_back/_form.html.twig') }}
+
+{% endblock %}

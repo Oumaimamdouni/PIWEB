@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReservationEvent{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="mb-4">Reservation</h1>
+            <a href="{{ path('app_reservation_event_index') }}" class="btn btn-secondary">Back to List</a>
+            {{ include('reservation_event/_delete_form.html.twig') }}
+            <div class="card mt-4" style="background-color: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+                <div class="card-body">
+                    <table class="table table-bordered mb-0">
+                        <tbody>
+                            <tr>
+                                <th style="width: 25%;">Description</th>
+                                <td>{{ reservation_event.description }}</td>
+                            </tr>
+                            <tr>
+                                <th style="width: 25%;">Date</th>
+                                <td>{{ reservation_event.date ? reservation_event.date|date('Y-m-d') : '' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

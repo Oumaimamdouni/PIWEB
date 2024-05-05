@@ -1,0 +1,17 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+<div class="form-group">
+    {{ form_label(form.nomZone, 'NomZone', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.nomZone, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.nomZone) }} {# Add this line to display errors #}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.capaciteT, 'CapaciteT', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.capaciteT, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.capaciteT) }} {# Add this line to display errors #}
+</div>
+
+<button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}

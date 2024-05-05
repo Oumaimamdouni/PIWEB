@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Verify Email{% endblock %}
+
+{% block body %}
+    <style>
+        .verify-container {
+            background-color: #ffffff; /* White background */
+            padding: 20px; /* Padding for spacing */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            max-width: 500px; /* Maximum width of the container */
+        }
+
+        .verify-card {
+            background-color: #f9f9f9; /* Light gray background for card */
+            border-radius: 8px; /* Rounded corners for card */
+            border: 1px solid #e0e0e0; /* Light border */
+        }
+
+        .verify-header {
+            border-bottom: 1px solid #e0e0e0; /* Border below the header */
+        }
+
+        .verify-button {
+            background-color: #007bff; /* Primary blue */
+            border: none; /* No border */
+            color: white; /* White text */
+            border-radius: 4px; /* Rounded corners */
+        }
+    </style>
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="verify-container">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="card verify-card">
+                        <div class="card-header text-center verify-header">
+                            <h2>Verify Your Email</h2>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-center">Please enter your email to proceed with verification.</p>
+                            <form method="post" action="{{ path('app_utilisateurs_verify') }}">
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <button type="submit" class="btn verify-button">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Reservation Details{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="text-center">Reservation Details</h1>
+
+        <div class="row mt-4">
+            <div class="col-md-6 offset-md-3">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>IdR</th>
+                            <td>{{ reservation.idR }}</td>
+                        </tr>
+                        <tr>
+                            <th>IdC</th>
+                            <td>{{ reservation.idC }}</td>
+                        </tr>
+                        <tr>
+                            <th>Zone</th>
+                            <td>{{ reservation.zone }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <td>{{ reservation.dater ? reservation.dater|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>TableId</th>
+                            <td>{{ reservation.tableId }}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>{{ reservation.status }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <a href="{{ path('app_reservation_back_index') }}" class="btn btn-primary">Back to List</a>
+                <a href="{{ path('app_reservation_back_edit', {'idR': reservation.idR}) }}" class="btn btn-success">Edit</a>
+
+                {% include 'reservation_back/_delete_form.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

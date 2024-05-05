@@ -1,0 +1,41 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+    <div class="container-fluid mt-4">
+        <h1 class="mb-4">Commande Details</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Numc</th>
+                            <td>{{ commande.numc }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Adressec</th>
+                            <td>{{ commande.adressec }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Panier</th>
+                            <td>{{ commande.panier }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Price</th>
+                            <td>{{ commande.price }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Status</th>
+                            <td>{{ commande.status }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="{{ path('app_commande_back_index') }}" class="btn btn-primary">Back to List</a>
+                <a href="{{ path('app_commande_back_edit', {'numc': commande.numc}) }}" class="btn btn-warning">Edit</a>
+                {{ include('commande_back/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

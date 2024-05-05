@@ -1,0 +1,73 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <h1 class="mb-4">Evenements</h1>
+
+    <a href="{{ path('app_evenement_back_new') }}" class="btn btn-success">Create New</a>
+<div>
+    <a href="{{ path('export_excel') }}" class="btn btn-success">Export to Excel</a>
+</div>
+    <!-- Search Input -->
+    <div class="mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search by ID, Nom, Nbparticipant, Datedebut, Datefin, etc.">
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Nbparticipant</th>
+                    <th scope="col">Datedebut</th>
+                    <th scope="col">Datefin</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evenement in evenements %}
+                <tr>
+                    <td>{{ evenement.id }}</td>
+                    <td>{{ evenement.nom }}</td>
+                    <td>{{ evenement.nbparticipant }}</td>
+                    <td>{{ evenement.datedebut ? evenement.datedebut|date('Y-m-d') : '' }}</td>
+                    <td>{{ evenement.datefin ? evenement.datefin|date('Y-m-d') : '' }}</td>
+                    <td>{{ evenement.image }}</td>
+                    <td>{{ evenement.description }}</td>
+                    <td>
+                        <a href="{{ path('app_evenement_back_show', {'id': evenement.id}) }}" class="btn btn-primary btn-sm">Show</a>
+                        <a href="{{ path('app_evenement_back_edit', {'id': evenement.id}) }}" class="btn btn-info btn-sm">Edit</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="text-center">No records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('searchInput');
+        const tableRows = document.querySelectorAll('table tbody tr');
+
+        searchInput.addEventListener('input', function () {
+            const searchText = searchInput.value.trim().toLowerCase();
+
+            tableRows.forEach(row => {
+                const rowData = Array.from(row.children).map(cell => cell.textContent.trim().toLowerCase());
+                row.style.display = rowData.some(text => text.includes(searchText)) ? '' : 'none';
+            });
+        });
+    });
+</script>
+{% endblock %}

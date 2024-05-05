@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur Profile{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="background-color: #ffffff; padding: 20px;">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{ asset('uploads/' ~ utilisateur.image) }}" class="img-fluid rounded-circle" alt="User Image">
+            </div>
+            <div class="col-md-9">
+                <h1 class="mb-4">{{ utilisateur.nom }} {{ utilisateur.prenom }}</h1>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Nom</th>
+                            <td>{{ utilisateur.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Prenom</th>
+                            <td>{{ utilisateur.prenom }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Email</th>
+                            <td>{{ utilisateur.email }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Role</th>
+                            <td>{{ utilisateur.role }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="{{ path('app_utilisateurs_edit', {'id': utilisateur.id}) }}" class="btn btn-primary">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

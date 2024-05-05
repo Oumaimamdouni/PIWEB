@@ -1,0 +1,36 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Table Details{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center">Table Details</h1>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row" style="width: 30%;">TableId</th>
+                        <td>{{ table.tableId }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">NomZone</th>
+                        <td>{{ table.nomZone }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">CapaciteT</th>
+                        <td>{{ table.capaciteT }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ path('app_tables_back_index') }}" class="btn btn-secondary">Back to List</a>
+        <a href="{{ path('app_tables_back_edit', {'tableId': table.tableId}) }}" class="btn btn-primary">Edit</a>
+        {{ include('tables_back/_delete_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

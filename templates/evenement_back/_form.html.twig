@@ -1,0 +1,69 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'}}) }}
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="{{ form.nom.vars.id }}">Nom</label>
+    <div class="col-sm-10">
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        {% for error in form.nom.vars.errors %}
+            <div class="text-danger">{{ error.message }}</div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="{{ form.nbparticipant.vars.id }}">Nbparticipant</label>
+    <div class="col-sm-10">
+        {{ form_widget(form.nbparticipant, {'attr': {'class': 'form-control'}}) }}
+        {% for error in form.nbparticipant.vars.errors %}
+            <div class="text-danger">{{ error.message }}</div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="{{ form.datedebut.vars.id }}">Datedebut</label>
+    <div class="col-sm-10">
+        {{ form_widget(form.datedebut, {'attr': {'class': 'form-control'}}) }}
+        {% for error in form.datedebut.vars.errors %}
+            <div class="text-danger">{{ error.message }}</div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="{{ form.datefin.vars.id }}">Datefin</label>
+    <div class="col-sm-10">
+        {{ form_widget(form.datefin, {'attr': {'class': 'form-control'}}) }}
+        {% for error in form.datefin.vars.errors %}
+            <div class="text-danger">{{ error.message }}</div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="{{ form.image.vars.id }}">Image</label>
+    <div class="col-sm-10">
+        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+        {% for error in form.image.vars.errors %}
+            <div class="text-danger">{{ error.message }}</div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="{{ form.description.vars.id }}">Description</label>
+    <div class="col-sm-10">
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        {% for error in form.description.vars.errors %}
+            <div class="text-danger">{{ error.message }}</div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-10 offset-sm-2">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</div>
+
+{{ form_end(form) }}

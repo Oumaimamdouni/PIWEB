@@ -1,0 +1,57 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Plat{% endblock %}
+
+{% block body %}
+    <h1>Plat</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>IdPlat</th>
+                        <td>{{ plat.idPlat }}</td>
+                    </tr>
+                    <tr>
+                        <th>NomPlat</th>
+                        <td>{{ plat.nomPlat }}</td>
+                    </tr>
+                    <tr>
+                        <th>DescriptionPlat</th>
+                        <td>{{ plat.descriptionPlat }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prix</th>
+                        <td>{{ plat.prix }}</td>
+                    </tr>
+                    <tr>
+                        <th>Quantite</th>
+                        <td>{{ plat.quantite }}</td>
+                    </tr>
+                    <tr>
+                        <th>NomCategorie</th>
+                        <td>{{ plat.nomCategorie }}</td>
+                    </tr>
+                    <tr>
+                        <th>LikePlat</th>
+                        <td>{{ plat.likePlat }}</td>
+                    </tr>
+                    <tr>
+                        <th>DislikePlat</th>
+                        <td>{{ plat.dislikePlat }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a href="{{ path('app_plat_back_index') }}" class="btn btn-secondary">Back to List</a>
+
+            <a href="{{ path('app_plat_back_edit', {'idPlat': plat.idPlat}) }}" class="btn btn-primary">Edit</a>
+
+            {{ include('plat_back/_delete_form.html.twig') }}
+        </div>
+        <div class="col-md-6">
+            <img src="{{ asset('uploads/' ~ plat.image) }}" alt="{{ plat.nomPlat }}" class="img-fluid">
+        </div>
+    </div>
+{% endblock %}

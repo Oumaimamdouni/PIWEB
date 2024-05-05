@@ -1,0 +1,79 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Zones Index{% endblock %}
+
+{% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+    <div class="container mt-4">
+        <h1 class="text-center">Zones Index</h1>
+
+        <!-- Search Input -->
+        <div class="form-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search by Nom or Description">
+        </div>
+    <div class="mt-3 mb-3 text-right">
+        <a href="{{ path('app_zones_export_pdf') }}" class="btn btn-danger">Export to PDF</a>
+    </div>
+        <!-- Table -->
+        <table class="table table-bordered mt-4">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ZoneId</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Capacity</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                {% for zone in zones %}
+                    <tr>
+                        <td>{{ zone.zoneId }}</td>
+                        <td>{{ zone.nom }}</td>
+                        <td>{{ zone.description }}</td>
+                        <td>{{ zone.capacity }}</td>
+                        <td>{{ zone.image }}</td>
+                        <td>
+                            <a href="{{ path('app_zones_back_show', {'zoneId': zone.zoneId}) }}" class="btn btn-info btn-sm">Show</a>
+                            <a href="{{ path('app_zones_back_edit', {'zoneId': zone.zoneId}) }}" class="btn btn-primary btn-sm">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">No records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_zones_back_new') }}" class="btn btn-success mt-3">Create New</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const tableBody = document.getElementById('tableBody');
+
+            searchInput.addEventListener('input', function () {
+                const searchText = searchInput.value.trim().toLowerCase();
+                const rows = tableBody.getElementsByTagName('tr');
+
+                for (let row of rows) {
+                    const cells = row.getElementsByTagName('td');
+                    let found = false;
+
+                    for (let cell of cells) {
+                        if (cell.textContent.toLowerCase().includes(searchText)) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    row.style.display = found ? '' : 'none';
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}LikeUser index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mb-4">LikeUser index</h1>
+
+        <!-- Search Input -->
+        <div class="form-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search by ID, User ID, Plat, or Status">
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">User ID</th>
+                        <th scope="col">Plat</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    {% for like_user in like_users %}
+                        <tr>
+                            <td>{{ like_user.idLike }}</td>
+                            <td>{{ like_user.idUser }}</td>
+                            <td>{{ like_user.plat }}</td>
+                            <td>{{ like_user.status }}</td>
+                            <td>
+                                <a href="{{ path('app_like_user_back_show', {'idLike': like_user.idLike}) }}" class="btn btn-sm btn-info">Show</a>
+                                <a href="{{ path('app_like_user_back_edit', {'idLike': like_user.idLike}) }}" class="btn btn-sm btn-primary">Edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center">No records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{{ path('app_like_user_back_new') }}" class="btn btn-success mt-3">Create New</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const tableBody = document.getElementById('tableBody');
+
+            searchInput.addEventListener('input', function () {
+                const searchText = searchInput.value.trim().toLowerCase();
+                const rows = tableBody.getElementsByTagName('tr');
+
+                for (let row of rows) {
+                    const cells = row.getElementsByTagName('td');
+                    let found = false;
+
+                    for (let cell of cells) {
+                        if (cell.textContent.toLowerCase().includes(searchText)) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    row.style.display = found ? '' : 'none';
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}New LikeUser{% endblock %}
+
+{% block body %}
+    <h1>Create new LikeUser</h1>
+
+    {{ include('like_user_back/_form.html.twig') }}
+
+    <a href="{{ path('app_like_user_back_index') }}">back to list</a>
+{% endblock %}

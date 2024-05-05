@@ -1,0 +1,28 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <div class="form-group">
+        {{ form_label(form.idC) }}
+        {{ form_widget(form.idC, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.idC) }} <!-- Display validation errors for idC -->
+    </div>
+    <div class="form-group">
+        {{ form_label(form.zone) }}
+        {{ form_widget(form.zone, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.zone) }} <!-- Display validation errors for zone -->
+    </div>
+    <div class="form-group">
+        {{ form_label(form.dater) }}
+        {{ form_widget(form.dater, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.dater) }} <!-- Display validation errors for dater -->
+    </div>
+    <div class="form-group">
+        {{ form_label(form.tableId) }}
+        {{ form_widget(form.tableId, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.tableId) }} <!-- Display validation errors for tableId -->
+    </div>
+    <div class="form-group">
+        {{ form_label(form.status) }}
+        {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.status) }} <!-- Display validation errors for status -->
+    </div>
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

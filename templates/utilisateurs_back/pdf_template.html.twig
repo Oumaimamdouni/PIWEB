@@ -1,0 +1,19 @@
+<h1>Utilisateurs Export</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Email</th>
+        <th>Role</th>
+    </tr>
+    {% for utilisateur in utilisateurs %}
+    <tr>
+        <td>{{ utilisateur.id }}</td>
+        <td>{{ utilisateur.nom }}</td>
+        <td>{{ utilisateur.prenom }}</td>
+        <td>{{ utilisateur.email }}</td>
+        <td>{{ utilisateur.role }}</td>
+    </tr>
+    {% endfor %}
+</table>

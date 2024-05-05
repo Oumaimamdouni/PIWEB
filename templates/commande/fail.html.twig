@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Failed - Tazuri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #FF6A00, #EE0979);
+            color: #333;
+            padding: 40px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .crossmark {
+            font-size: 72px;
+            color: #FF0000;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .message {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        .suggestions {
+            font-size: 16px;
+            text-align: left;
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #FF6A00;
+            color: white;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        .button:hover {
+            background: #E04E00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="crossmark">&#10060;</div>
+        <div class="title">Payment Failed</div>
+        <div class="message">We're sorry, but your payment could not be processed.</div>
+        <div class="suggestions">
+            <p>Here are some possible reasons for the failure:</p>
+            <ul>
+                <li>Insufficient funds</li>
+                <li>Incorrect payment information</li>
+                <li>Payment method declined by the bank</li>
+            </ul>
+            <p>Try the following:</p>
+            <ul>
+                <li>Check your payment details and try again.</li>
+                <li>Use a different payment method.</li>
+                <li>Contact your bank for more information.</li>
+            </ul>
+        </div>
+        <a class="button" href="{{ path('app_home') }}">Retry Payment</a>
+        <p>If you need further assistance, please contact our support team.</p>
+    </div>
+</body>
+</html>

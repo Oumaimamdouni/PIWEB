@@ -1,0 +1,39 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Resto{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="mb-4">Resto Details</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row">IdResto</th>
+                            <td>{{ resto.idResto }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Nomr</th>
+                            <td>{{ resto.nomr }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Adresser</th>
+                            <td>{{ resto.adresser }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Numr</th>
+                            <td>{{ resto.numr }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <a href="{{ path('app_resto_back_index') }}" class="btn btn-secondary">Back to List</a>
+                <a href="{{ path('app_resto_back_edit', {'idResto': resto.idResto}) }}" class="btn btn-primary">Edit</a>
+            </div>
+        </div>
+
+        {{ include('resto_back/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

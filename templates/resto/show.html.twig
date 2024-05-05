@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resto{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="margin-bottom: 20px;">Resto</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>IdResto</th>
+                            <td>{{ resto.idResto }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nomr</th>
+                            <td>{{ resto.nomr }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresser</th>
+                            <td>{{ resto.adresser }}</td>
+                        </tr>
+                        <tr>
+                            <th>Numr</th>
+                            <td>{{ resto.numr }}</td>
+                        </tr>
+                        <tr>
+                            <th>Image</th>
+                            <td><img src="{{ asset('resto.jpg') }}" alt="Restaurant Image" style="max-width: 100%;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="{{ path('app_resto_index') }}" class="btn btn-primary">Back to List</a>
+        </div>
+    </div>
+{% endblock %}

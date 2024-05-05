@@ -1,0 +1,24 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'}}) }}
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.description) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.date) }}
+            {{ form_widget(form.date, {'attr': {'class': 'form-control datepicker'}}) }}
+            {{ form_errors(form.date) }}
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    {{ form_label(form.idEvenement) }}
+    {{ form_widget(form.idEvenement, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.idEvenement) }}
+</div>
+<button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

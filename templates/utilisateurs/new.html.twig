@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Utilisateur{% endblock %}
+
+{% block body %}
+    <br>
+    <br>
+    <div class="container mt-5" style="background-color: white; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <div class="registration-container"> <!-- Remove the white-container class -->
+            <h1>Register</h1>
+            {{ form_start(form, {'attr': {'class': 'registration-form', 'novalidate': 'novalidate'}}) }}
+            <div class="form-group">
+                {{ form_label(form.nom) }}
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nom) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.prenom) }}
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.prenom) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.motDePasse) }}
+                {{ form_widget(form.motDePasse, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.motDePasse) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.email) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.image) }}
+                {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.image) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+{% endblock %}

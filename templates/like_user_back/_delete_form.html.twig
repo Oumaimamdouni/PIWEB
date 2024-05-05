@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_like_user_back_delete', {'idLike': like_user.idLike}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ like_user.idLike) }}">
+    <button class="btn">Delete</button>
+</form>

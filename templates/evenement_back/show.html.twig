@@ -1,0 +1,45 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+{% block body %}
+    <h1>Evenement</h1>
+
+    <a href="{{ path('app_evenement_back_index') }}">back to list</a>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ evenement.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ evenement.nom }}</td>
+            </tr>
+            <tr>
+                <th>Nbparticipant</th>
+                <td>{{ evenement.nbparticipant }}</td>
+            </tr>
+            <tr>
+                <th>Datedebut</th>
+                <td>{{ evenement.datedebut ? evenement.datedebut|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Datefin</th>
+                <td>{{ evenement.datefin ? evenement.datefin|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/' ~ evenement.image) }}" alt="Image" style="max-width: 100px; max-height: 100px;"></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ evenement.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_evenement_back_edit', {'id': evenement.id}) }}" class="btn btn-warning">Edit</a>
+
+    {{ include('evenement_back/_delete_form.html.twig') }}
+{% endblock %}

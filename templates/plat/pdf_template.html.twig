@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu PDF</title>
+    <style>
+        /* Basic styling for the PDF */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Menu</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Category</th>
+            <th>Image</th>
+            <th>Likes</th>
+            <th>Dislikes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for menu in menus %}
+            <tr>
+                <td>{{ menu.idPlat }}</td>
+                <td>{{ menu.nomPlat }}</td>
+                <td>{{ menu.descriptionPlat }}</td>
+                <td>{{ menu.prix }}</td>
+                <td>{{ menu.quantite }}</td>
+                <td>{{ menu.nomCategorie }}</td>
+                <td><img src="{{ menu.image }}" style="max-width: 100px;"></td>
+                <td>{{ menu.likePlat }}</td>
+                <td>{{ menu.dislikePlat }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">No records found</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

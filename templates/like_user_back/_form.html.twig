@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.idUser, 'User ID') }}
+                {{ form_widget(form.idUser, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.plat, 'plat') }}
+                {{ form_widget(form.plat, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.status, 'Status') }}
+                {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+<meta property="og:title" content="{{ evenement.nom }}" />
+<meta property="og:description" content="{{ evenement.description }}" />
+<meta property="og:image" content="{{ asset('uploads/' ~ evenement.image) }}" />
+<meta property="og:url" content="{{ app.request.getUri() }}" />
+{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">                    
+                <a href="{{ path('app_evenement_index') }}" class="btn btn-secondary mr-2">Back to List</a>
+
+                <div class="card-header">
+                    <h3 class="card-title">{{ evenement.nom }}</h3>
+                </div>
+
+                <div class="card-body">
+                    <img src="{{ asset('uploads/' ~ evenement.image) }}" class="card-img-top" alt="Event Image">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Nbparticipant:</strong> {{ evenement.nbparticipant }}</li>
+                        <li class="list-group-item"><strong>Datedebut:</strong> {{ evenement.datedebut ? evenement.datedebut|date('Y-m-d') : '' }}</li>
+                        <li class="list-group-item"><strong>Datefin:</strong> {{ evenement.datefin ? evenement.datefin|date('Y-m-d') : '' }}</li>
+                        <li class="list-group-item"><strong>Description:</strong> {{ evenement.description }}</li>
+                    </ul>
+                </div>
+
+                <div class="card-footer">
+                    <a href="{{ path('app_reservation_event_new', {'id': evenement.id}) }}" class="btn btn-sm btn-outline-secondary" style="background-color: #28a745; color: #fff;">Participate</a>
+                    <!-- Social Sharing Links -->
+                    <div style="margin-top: 10px;">
+                        <!-- Share on Facebook -->
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.getUri() }}"
+                           class="btn btn-sm btn-primary"
+                           target="_blank">Share on Facebook</a>
+
+                        <!-- Share on Twitter -->
+                        <a href="https://twitter.com/intent/tweet?text={{ evenement.nom }} - {{ app.request.getUri() }}"
+                           class="btn btn-sm btn-info"
+                           target="_blank">Share on Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Plat index{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="mb-4">Plat index</h1>
+
+        <!-- Search Input -->
+        <div class="form-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search by ID, Name, Description, Price, Quantity, Category, Likes, or Dislikes">
+        </div>
+<a href="{{ path('export_pdf') }}" class="btn btn-secondary">Export to PDF</a>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Likes</th>
+                        <th scope="col">Dislikes</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    {% for plat in plats %}
+                        <tr>
+                            <td>{{ plat.idPlat }}</td>
+                            <td>{{ plat.nomPlat }}</td>
+                            <td>{{ plat.descriptionPlat }}</td>
+                            <td>{{ plat.prix }}</td>
+                            <td>{{ plat.quantite }}</td>
+                            <td>{{ plat.nomCategorie }}</td>
+                            <td>
+                                <img src="{{ plat.image }}" alt="Plat Image" class="img-thumbnail" style="max-height: 100px;">
+                            </td>
+                            <td>{{ plat.likePlat }}</td>
+                            <td>{{ plat.dislikePlat }}</td>
+                            <td>
+                                <a href="{{ path('app_plat_back_show', {'idPlat': plat.idPlat}) }}" class="btn btn-primary btn-sm">Show</a>
+                                <a href="{{ path('app_plat_back_edit', {'idPlat': plat.idPlat}) }}" class="btn btn-info btn-sm">Edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="10">No records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{{ path('app_plat_back_new') }}" class="btn btn-success">Create new</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const tableBody = document.getElementById('tableBody');
+
+            searchInput.addEventListener('input', function () {
+                const searchText = searchInput.value.trim().toLowerCase();
+                const rows = tableBody.getElementsByTagName('tr');
+
+                for (let row of rows) {
+                    const cells = row.getElementsByTagName('td');
+                    let found = false;
+
+                    for (let cell of cells) {
+                        if (cell.textContent.toLowerCase().includes(searchText)) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    row.style.display = found ? '' : 'none';
+                }
+            });
+        });
+    </script>
+{% endblock %}

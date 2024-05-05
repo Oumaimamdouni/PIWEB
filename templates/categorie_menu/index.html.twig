@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategorieMenu index{% endblock %}
+
+{% block body %}
+    <div class="row">
+        {% for categorie_menu in categorie_menus %}
+            <div class="col-md-4" style="margin-bottom: 20px;">
+                <div class="card" style="background: linear-gradient(135deg, #ffffff, #f0f0f0); border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
+                    <div class="card-body" style="padding: 20px;">
+                        <img src="{{ asset('uploads/' ~ categorie_menu.imageCategorie) }}" alt="{{ categorie_menu.nomCategorie }}" style="max-width: 100%; height: auto; border-radius: 5px;">
+                        <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold; color: #333; margin-top: 10px; margin-bottom: 10px;">{{ categorie_menu.nomCategorie }}</h5>
+                        <p class="card-text" style="font-size: 1rem; color: #666;">{{ categorie_menu.descriptionCategorie }}</p>
+                        <div class="d-flex justify-content-between align-items-center" style="margin-top: 20px;">
+                            <a href="{{ path('app_plats_by_categorie', {'nomCategorie': categorie_menu.nomCategorie}) }}" class="btn btn-primary">Show</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">No records found</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

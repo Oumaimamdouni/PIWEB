@@ -1,0 +1,45 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+app_commande_change_status:
+    path: '/commande/back/{numc}/change-status/{status}'
+    controller: App\Controller\CommandeBackController::changeStatus
+
+app_chatbot:
+    path: '/chatbot/interact'
+    controller: App\Controller\CommandeController::chat
+    methods: ['POST']
+
+like_plat:
+    path: /plat/{idPlat}/like
+    controller: App\Controller\PlatController::likePlat
+
+dislike_plat:
+    path: /plat/{idPlat}/dislike
+    controller: App\Controller\PlatController::dislikePlat
+
+export_pdf:
+    path: /export-pdf
+    controller: App\Controller\PlatBackController::exportPdf
+    methods: [GET]
+
+app_tables_show:
+    path: '/zones/{zoneName}/tables'
+    controller: 'App\Controller\TablesController::showTablesForZone'
+
+verify_email:
+    path: /verify
+    controller: App\Controller\UtilisateursController::verifyEmail
+
+forget_user:
+    path: /forget
+    controller: App\Controller\UtilisateursController::forgetUser
+
+forgetEmail:
+    path: /forgetEmail
+    controller: App\Controller\UtilisateursController::forgetEmail
+
+app_reservation_event:
+  path: /reservation/event
+  controller:  App\Controller\ReservationEventController::index

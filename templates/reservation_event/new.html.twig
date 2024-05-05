@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ReservationEvent{% endblock %}
+
+{% block body %}
+<div class="bg-white py-4" style="margin-top:50px;margin-bottom:50px;">
+    <div class="container mt-4" style="background-color:white">
+        <h1 class="mb-4">Reservation</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'}}) }}
+
+                <!-- Display form-level errors, if any -->
+                {% if form.vars.errors|length > 0 %}
+                    <div class="alert alert-danger">
+                        <strong>Error:</strong>
+                        {{ form_errors(form) }} <!-- This shows all form errors -->
+                    </div>
+                {% endif %}
+
+                <!-- Display errors for the 'description' field -->
+                <div class="form-group">
+                    {{ form_label(form.description, 'Description') }}
+                    {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                    {% if form.description.vars.errors|length > 0 %}
+                        <div class="text-danger">
+                            {{ form_errors(form.description) }} <!-- Show field-specific errors -->
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Display errors for the 'date' field -->
+                <div class="form-group">
+                    {{ form_label(form.date, 'Date') }}
+                    {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                    {% if form.date.vars.errors|length > 0 %}
+                        <div class="text-danger">
+                            {{ form_errors(form.date) }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-primary">Reservé</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

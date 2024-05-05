@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation Index{% endblock %}
+
+{% block body %}
+<!-- Button to create a new reservation -->
+<a href="{{ path('app_reservation_new') }}" style="display: inline-block; background-color: #f39c12; color: white; text-decoration: none; padding: 10px 20px; border-radius: 4px; margin-top: 20px; text-align: center; transition: background-color 0.3s;">Create New</a>
+
+<!-- Container for the FullCalendar -->
+<div style="margin-top: 20px; background-color: #f8c471; padding: 20px; border-radius: 5px;">
+    <div id="calendar" style="height: 500px;"></div>
+</div>
+
+<!-- Include FullCalendar -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js" integrity="sha256-i4vDW9EgtaJmeauDDymtNF2omPZ1fCKpf4w1gBlU1IE=" crossorigin="anonymous"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const calendarEl = document.getElementById('calendar');
+
+    const events = [
+        {% for reservation in reservations %}
+        {
+            title: "Reservation: {{ reservation.zone }}",
+            start: "{{ reservation.dater ? reservation.dater|date('Y-m-d') : '' }}",
+            extendedProps: {
+                idR: "{{ reservation.idR }}",
+                tableId: "{{ reservation.tableId }}",
+                status: "{{ reservation.status }}"
+            }
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: events,
+        dateClick: function(info) {
+            console.log(`Date clicked: ${info.dateStr}`);
+            const clickedDate = info.dateStr;
+        },
+        eventClick: function(info) {
+            // Navigate to reservation show page when an event is clicked
+            const reservationId = info.event.extendedProps.idR;
+            window.location.href = `{{ path('app_reservation_show', {'idR': '`+ reservationId +`'}) }}`;
+        }
+    });
+
+    calendar.render();
+});
+</script>
+
+<!-- Table to display reservations -->
+<div style="margin-top: 20px; background-color: #f8c471; padding: 20px; border-radius: 5px; overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+        <thead>
+            <tr style="background-color: #f39c12; color: white;">
+                <th>IdR</th>
+                <th>Zone</th>
+                <th>Date</th>
+                <th>TableId</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr style="background-color: #fff;">
+                <td>{{ reservation.idR }}</td>
+                <td>{{ reservation.zone }}</td>
+                <td>{{ reservation.dater ? reservation.dater|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.tableId }}</td>
+                <td>{{ reservation.status }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_show', {'idR': reservation.idR}) }}" style="padding: 8px 12px; background-color: #f39c12; color: white; text-align: center; text-decoration: none;">Show</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7">No records found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

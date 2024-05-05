@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Reservation{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<div class="container" style="background-color: #f8c471; padding: 20px;">
+    <h1 class="mb-4">Create New Reservation</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {{ form_start(form) }}
+            <div class="mb-3">
+                {{ form_label(form.zone, 'Zone:', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.zone, {'attr': {'class': 'form-control', 'style': 'background-color: #f39c12; color: white;'}}) }}
+                {{ form_errors(form.zone) }} <!-- Render errors for the Zone field -->
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.tableId, 'Table:', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.tableId, {'attr': {'class': 'form-control', 'style': 'background-color: #f39c12; color: white;'}}) }}
+                {{ form_errors(form.tableId) }} <!-- Render errors for the Table field -->
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.dater, 'Table:', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.dater, {'attr': {'class': 'form-control', 'style': 'background-color: #f39c12; color: white;'}}) }}
+                {{ form_errors(form.dater) }} <!-- Render errors for the Table field -->
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color: #f39c12; border-color: #f39c12;">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+<!-- Include another Twig page in a box -->
+<div class="container" style="background-color: #d5dbdb; padding: 20px; margin-top: 20px;">
+    <h2>Additional Information</h2>
+    {% include 'reservation/map.html.twig' %}
+</div>
+<br>
+<br>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}CategorieMenu{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">CategorieMenu</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ asset('uploads/' ~ categorie_menu.imageCategorie) }}" alt="{{ categorie_menu.nomCategorie }}" class="img-fluid rounded">
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>IdCategorie</th>
+                                <td>{{ categorie_menu.idCategorie }}</td>
+                            </tr>
+                            <tr>
+                                <th>NomCategorie</th>
+                                <td>{{ categorie_menu.nomCategorie }}</td>
+                            </tr>
+                            <tr>
+                                <th>DescriptionCategorie</th>
+                                <td>{{ categorie_menu.descriptionCategorie }}</td>
+                            </tr>
+                            <tr>
+                                <th>ImageCategorie</th>
+                                <td>{{ categorie_menu.imageCategorie }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('app_categorie_menu_back_index') }}" class="btn btn-secondary">Back to list</a>
+            <a href="{{ path('app_categorie_menu_back_edit', {'idCategorie': categorie_menu.idCategorie}) }}" class="btn btn-primary">Edit</a>
+            {{ include('categorie_menu_back/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

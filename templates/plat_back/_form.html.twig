@@ -1,0 +1,130 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.nomPlat, 'Nom du Plat') }}
+            {{ form_widget(form.nomPlat, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nomPlat) }} 
+        </div>
+        <div class="form-group">
+            {{ form_label(form.descriptionPlat, 'Description du Plat') }}
+            {{ form_widget(form.descriptionPlat, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.descriptionPlat) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.prix, 'Prix') }}
+            {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.prix) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.quantite, 'Quantité') }}
+            {{ form_widget(form.quantite, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.quantite) }} 
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.nomCategorie, 'Nom de la Catégorie') }}
+            {{ form_widget(form.nomCategorie, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nomCategorie) }}
+        </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.image, 'Image') }}
+            <div class="image-drop-zone" id="image-drop-zone">
+                <p>Drag & Drop or Click to Upload</p>
+            </div>
+            {{ form_widget(form.image, {'attr': {'class': 'form-control', 'style': 'display: none'}}) }}
+            <p id="image-upload-message"></p>
+            {{ form_errors(form.image) }}
+        </div>
+    </div>
+        <div class="form-group">
+            {{ form_label(form.likePlat, 'Likes') }}
+            {{ form_widget(form.likePlat, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.likePlat) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.dislikePlat, 'Dislikes') }}
+            {{ form_widget(form.dislikePlat, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.dislikePlat) }}
+        </div>
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const imageDropZone = document.getElementById('image-drop-zone');
+        const imageInput = document.querySelector('input[type="file"]');
+        const message = document.getElementById('image-upload-message');
+
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            imageDropZone.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        // Highlight drop zone when item is dragged over it
+        ['dragenter', 'dragover'].forEach(eventName => {
+            imageDropZone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            imageDropZone.addEventListener(eventName, unhighlight, false);
+        });
+
+        // Handle dropped files
+        imageDropZone.addEventListener('drop', handleDrop, false);
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function highlight() {
+            imageDropZone.classList.add('highlight');
+        }
+
+        function unhighlight() {
+            imageDropZone.classList.remove('highlight');
+        }
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+
+            handleFiles(files);
+        }
+
+        function handleFiles(files) {
+            const file = files[0];
+
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    imageInput.files = files;
+                    message.textContent = `${file.name} uploaded successfully.`;
+                };
+            } else {
+                message.textContent = 'Only image files are allowed.';
+            }
+        }
+
+        // Allow click to trigger file input
+        imageDropZone.addEventListener('click', () => {
+            imageInput.click();
+        });
+
+        // Handle file input change
+        imageInput.addEventListener('change', () => {
+            const files = imageInput.files;
+            handleFiles(files);
+        });
+    });
+</script>

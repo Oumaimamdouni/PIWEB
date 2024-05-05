@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zones index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center mb-4">Zones</h1>
+
+        <div class="row justify-content-center">
+            {% for zone in zones %}
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm" style="background-color: white;">
+                        <img src="{{ asset('uploads/' ~ zone.image) }}" class="card-img-top" alt="{{ zone.nom }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ zone.nom }}</h5>
+                            <p class="card-text">{{ zone.description }}</p>
+                            <p class="card-text"><strong>Capacity:</strong> {{ zone.capacity }}</p>
+                            <div class="text-center">
+                                <a href="{{ path('app_tables_Zone_show', {'zoneName': zone.nom}) }}" class="btn btn-primary mx-2">Reservé</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-4 mb-4">
+                    <p class="text-center">No records found</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
